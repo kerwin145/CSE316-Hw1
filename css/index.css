@@ -1,1 +1,156 @@
-/* Add CSS stylesheet */
+/* GENERAL */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}  
+
+button:hover{
+    cursor: pointer;
+}
+
+/*---------------HEADER---------------*/
+.header{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 2rem;
+    border-bottom: 1px solid black;
+    background-color: lightgray;
+}
+
+.title{
+    text-align: center;
+}
+
+.searchbar{
+    justify-self: right;
+    align-self: center;
+}
+
+.main{
+    display: flex;  
+    height: 100%;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    flex: 1;
+}
+
+.menu-questions, .menu-tags{
+    color: blue;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.button-active{
+    background-color: lightgray;
+}
+
+/*---------------MAIN CONTENT---------------*/
+
+.content{
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px dashed black;
+    border-left: 1px dashed black;
+
+}
+
+.content-header button{
+    background-color: dodgerblue;
+    color: ghostwhite;
+    height: fit-content;
+    width: fit-content;
+    justify-self: end;
+    padding: .5rem;
+}
+
+.content-filter{
+    justify-self: end;
+}
+.content-filter > fieldset{
+    border: none;
+    display: flex;
+    width: fit-content;
+    padding: 0;
+}
+
+.content-filter input[type = "radio"]{
+    display: none;
+}
+
+.content-filter label{
+   display: inline-block;
+   padding: .5rem 1rem;
+   cursor: pointer;
+   border: 1px solid black; 
+   border-left: none;
+}
+.content-filter fieldset label:nth-child(2){
+    border-left: 1px solid black; 
+}
+
+.content-filter input[type="radio"]:checked+label {
+    /*this rules makes the label after the checked button have a changed backgroudn color*/
+    background-color: silver;
+}
+
+/*---------------MAIN CONTENT, QUESTION LIST---------------*/
+#questionList{
+    display: flex;
+    flex-direction: column;
+}
+
+.question-container{
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px dashed black;
+    border-left: 1px dashed black;
+
+}
+
+.question-stats{
+    display: flex;
+    flex-direction: column;
+}
+
+.question-body{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.question-body p{
+    color: dodgerblue;
+}
+
+.question-tags{
+    display: flex;
+    gap: 1rem;
+}
+
+.question-tags div{
+    background-color: gray;
+    border-radius: 4px;
+    padding: .5rem;
+    border: 1px solid black;
+    color: white;
+}
+
+.question-username{
+    color: maroon
+}

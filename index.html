@@ -6,13 +6,40 @@
 </head>
 <body>
   <div id="header" class="header">
-    <!-- Title -->
-    <!-- Search bar -->
+    <div></div>
+    <h1 class="title">Fake Stack Overflow</h1>
+    <input type="text" name="searchbar" class = "searchbar" placeholder = "Search . . ." id="">
   </div>
 
   <div id="main" class="main">
-    <!-- Left Side: menu -->
-    <!-- Right Side: all questions -->
+    <div class="menu">
+      <button class="menu-questions button-active">Questions</button>
+      <button class="menu-tags">Tags</button>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h2>All Questions</h2>
+        <button>Ask Question</button>
+        <p><span id = "questionNumber">SOME NUMBER</span> Questions</p>
+        <div class="content-filter">
+        <fieldset>
+          <input type="radio" id = "filterNewest" name = "questionFilter" value = "Newest" checked>
+          <label for="filterNewest">Newest</label>
+          
+          <input type="radio" id = "filterActive" name = "questionFilter" value = "Active">
+          <label for="filterActive">Active</label>
+          
+          <input type="radio" id = "filterUnanswered" name = "questionFilter" value = "Unanswered">
+          <label for="filterUnanswered">Unanswered</label>
+        </fieldset>
+        </div>
+      </div>
+
+      <div id = "questionList">
+        <!-- Dynamically filled in with JS -->
+      </div>
+    </div>
 
   </div>
 </body>

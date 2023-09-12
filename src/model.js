@@ -21,7 +21,27 @@ export default class Model {
                     askDate: new Date('January 01, 2022 21:06:12'),
                     ansIds: ['a3', 'a4', 'a5'],
                     views: 121,
-                  }
+                  },
+                  {
+                    qid: 'q3',
+                    title: 'I am very active, but old ',
+                    text: 'Yurr.',
+                    tagIds: ['t4', 't2'],
+                    askedBy : 'Not Kelvin',
+                    askDate: new Date('August 16, 2018 21:06:12'),
+                    ansIds: ['a6'],
+                    views: 69,
+                  },
+                  {
+                    qid: 'q4',
+                    title: 'I am too new and am unanswered :(',
+                    text: 'How did so many view this post already?',
+                    tagIds: ['t4', 't2'],
+                    askedBy : 'Not Kelvin',
+                    askDate: new Date('September 10, 2023 20:06:12'),
+                    ansIds: [],
+                    views: 420,
+                  },
                 ],
       tags: [
         {
@@ -72,6 +92,12 @@ export default class Model {
           text: 'I just found all the above examples just too confusing, so I wrote my own. ',
           ansBy: 'sana',
           ansDate: new Date('December 31, 2022 20:20:59'),
+        },
+        {
+          aid: 'a6',
+          text: 'Yurrr',
+          ansBy: 'Not Kelvin',
+          ansDate: new Date('January 31, 2023 20:20:59'),
         }
       ]
     };
