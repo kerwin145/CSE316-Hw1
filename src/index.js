@@ -1,11 +1,24 @@
 import Model from './model.js';
 
+//TODO Add question tag click filter functionality
+
 const questionList = document.querySelector("#questionList")
 const questionCount = document.querySelector("#questionNumber")
 
-const filterNewest = document.querySelector('#filterNewest')
-const filterActive = document.querySelector('#filterActive')
-const filterUnanswered = document.querySelector('#filterUnanswered')
+const sortNewest = document.querySelector('#sortNewest')
+const sortActive = document.querySelector('#sortActive')
+const sortUnanswered = document.querySelector('#sortUnanswered')
+
+const SortEnum = {
+  NEWEST: "newest",
+  ACTIVE: "active",
+  UNANSWERED: "unanswered",
+};
+
+let selectedSort = SortEnum.NEWEST;
+
+const filterTags = document.querySelector('#tagFilters')
+let tagFilters = [] //filter questions based on tags
 
 const model = new Model()
 const data = model.data
@@ -13,15 +26,17 @@ const data = model.data
 let questions = data.questions.sort((a,b) => b.askDate.getTime() - a.askDate.getTime())
 
 
-function filterQuestionsByNew(){
+function sortQuestionsByNew(){
+  selectedSort = SortEnum.NEWEST
   questions =  data.questions.sort((a,b) => b.askDate.getTime() - a.askDate.getTime())
-  loadHomePageView()
+  filterQuestions()
+  loadHomeQuestions()
 }
 
-function filterQuestionsActive(){
+function sortQuestionsByActive(){
+  selectedSort = SortEnum.ACTIVE
   //first filter questions without answers.
   questions = data.questions.filter((x) => x.ansIds.length > 0)
-  
   //lambdas go brrrr
   //we map the answer id to their corresponding times in the answers array, found with the .find() lambda, and then get its minimum, and use that as the comparator for this sort method
   questions = questions.sort((a, b) =>
@@ -32,27 +47,75 @@ function filterQuestionsActive(){
         data.answers.find((element) => x === element.aid).ansDate.getTime()
       ))
   )  
-  loadHomePageView()
+  filterQuestions()
+  loadHomeQuestions()
 }
 
-function filterQuestionsByUnanswered(){
+function sortQuestionsByUnanswered(){
+  selectedSort = SortEnum.UNANSWERED
   questions = data.questions.filter((x) => x.ansIds.length == 0)
-  loadHomePageView()
+  filterQuestions()
+  loadHomeQuestions()
+}
+
+function deleteTagFilter(tagName, tagId){
+  const target = document.querySelector(`#tag_${tagId}`)
+  target.remove()
+
+  tagFilters = tagFilters.filter(tag => tag.id != tagId)
+
+  if(tagFilters.length == 0)
+    filterTags.innerHTML = ""
+
+    filterAndSortQuestions()
+    loadHomeQuestions()
+}
+function addTagFilter(tagName, tagId){
+    // Prevent duplicate tag filter
+    if (tagFilters.some((element) => element.name == tagName)) return;
+
+    if (tagFilters.length == 0) {
+      filterTags.innerHTML = `<h3>Applied Tag Filters</h3>`;
+    }
+  
+    tagFilters.push({ name: tagName, id: tagId });
+  
+    const tagContainer = document.createElement("div");
+    tagContainer.classList.add("tagFilter");
+    tagContainer.id = `tag_${tagId}`;
+  
+    const tagSpan = document.createElement("span");
+    tagSpan.textContent = tagName;
+  
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("tagFilter-delete");
+    deleteButton.innerHTML = '<i class="fa fa-close"></i>';
+    deleteButton.addEventListener("click", () => deleteTagFilter(tagName, tagId));
+  
+    tagContainer.appendChild(tagSpan);
+    tagContainer.appendChild(deleteButton);
+  
+    filterTags.appendChild(tagContainer);
+  
+    filterQuestions()
+    loadHomeQuestions()
 }
 
 window.onload = function() {
-  loadHomePageView()
+  filterAndSortQuestions()
+  loadHomeQuestions()
   
-  filterNewest.addEventListener('click', filterQuestionsByNew)
-  filterActive.addEventListener('click', filterQuestionsActive)
-  filterUnanswered.addEventListener('click', filterQuestionsByUnanswered)
+  sortNewest.addEventListener('click', sortQuestionsByNew)
+  sortActive.addEventListener('click', sortQuestionsByActive)
+  sortUnanswered.addEventListener('click', sortQuestionsByUnanswered)
 };
   
-function loadHomePageView(){
+function loadHomeQuestions(){
   //CLEAR OUT CHILDREN FROM QUESTIONLIST
   questionList.innerHTML = ""
   //INITIALIZE COUNT
   questionCount.innerHTML = data.questions.length
+ 
   //----------------------------------------INITIALIZE BODY
   //needed for timestamp
   const timeNow = new Date()
@@ -89,7 +152,11 @@ function loadHomePageView(){
 
     question.tagIds.forEach((tagId) =>{
       let questionTag = document.createElement('div')
-      questionTag.innerHTML = data.tags.find((element)=> element.tid == tagId).name
+      let tagName = data.tags.find((element)=> element.tid == tagId).name
+      questionTag.innerHTML = tagName
+
+      questionTag.addEventListener('click', () => addTagFilter(tagName, tagId))
+
       questionTags.appendChild(questionTag)
     })
 
@@ -161,4 +228,31 @@ function loadHomePageView(){
 
     questionContainer.appendChild(questionTimestamp)
   })
+}
+
+
+function filterAndSortQuestions(){
+  sortQuestions()
+  filterQuestions()
+}
+
+function sortQuestions(){
+  //filter question list based off of tag filters
+  if(selectedSort == SortEnum.NEWEST)
+    sortQuestionsByNew()
+  else if (selectedSort == SortEnum.ACTIVE)
+    sortQuestionsByActive()
+  else if (selectedSort == SortEnum.UNANSWERED)
+    sortQuestionsByUnanswered()
+}
+
+function filterQuestions(){
+  questions = questions.filter(question => {
+    for(var i = 0; i < tagFilters.length; i++) {
+      //if there is a tag that is not in our question, we return false
+      if (!question.tagIds.includes(tagFilters[i].id))
+        return false
+    }
+    return true
+  }) 
 }

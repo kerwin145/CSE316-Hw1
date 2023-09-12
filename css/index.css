@@ -69,7 +69,7 @@ button:hover{
 
 }
 
-.content-header button{
+.content-askquestion{
     background-color: dodgerblue;
     color: ghostwhite;
     height: fit-content;
@@ -78,34 +78,68 @@ button:hover{
     padding: .5rem;
 }
 
-.content-filter{
+.content-sort{
     justify-self: end;
 }
-.content-filter > fieldset{
+.content-sort > fieldset{
     border: none;
     display: flex;
     width: fit-content;
     padding: 0;
 }
 
-.content-filter input[type = "radio"]{
+.content-sort input[type = "radio"]{
     display: none;
 }
 
-.content-filter label{
+.content-sort label{
    display: inline-block;
    padding: .5rem 1rem;
    cursor: pointer;
    border: 1px solid black; 
    border-left: none;
 }
-.content-filter fieldset label:nth-child(2){
+.content-sort fieldset label:nth-child(2){
     border-left: 1px solid black; 
 }
 
-.content-filter input[type="radio"]:checked+label {
+.content-sort input[type="radio"]:checked+label {
     /*this rules makes the label after the checked button have a changed backgroudn color*/
     background-color: silver;
+}
+
+.content-tag-filters{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    min-width: 0;
+    flex-wrap: wrap;
+    grid-column: 1/3;
+    align-items: center;
+}
+
+.tagFilter{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: lightgray;
+    color: black;
+    border-radius: 4px;
+    padding: .5rem;
+    border: 1px solid black;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.tagFilter button{
+    background-color: rgba(0,0,0,0);
+    border: none;
+    line-height: 1;
+}
+
+.tagFilter b{
+    line-height: 1;
+
 }
 
 /*---------------MAIN CONTENT, QUESTION LIST---------------*/
@@ -120,7 +154,6 @@ button:hover{
     gap: 2rem;
     border-bottom: 1px dashed black;
     border-left: 1px dashed black;
-
 }
 
 .question-stats{
@@ -149,6 +182,7 @@ button:hover{
     padding: .5rem;
     border: 1px solid black;
     color: white;
+    width: fit-content;
 }
 
 .question-username{
