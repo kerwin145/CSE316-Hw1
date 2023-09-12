@@ -4,5 +4,5 @@
 
 ## Team Member 1 contribution
 Figure1 functionality implemented
-- Includes: Header (search bar not included), menu (tags not included), rendering question list, and question filtering
+- Includes: Header (search bar not included), menu bar, rendering question list, question sorting, and filtering by tags
 ## Team Member 2 contribution
