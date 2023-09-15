@@ -188,3 +188,19 @@ button:hover{
 .question-username{
     color: maroon
 }
+
+/*---------------ASK QUESTION PAGE---------------*/
+.askQuestion-container{
+	display: flex;
+	flex-direction: column;
+	flex: 5;
+}
+.askQuestion-directions{
+	display: flex;
+	flex-direction: column;
+}
+
+.askQuestion-details{
+	display: flex;
+	flex-direction: column;
+}

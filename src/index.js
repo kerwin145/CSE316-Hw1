@@ -2,12 +2,16 @@ import Model from './model.js';
 
 //TODO Add question tag click filter functionality
 
+const main = document.querySelector('#main')
+const content = document.querySelector('.content')
+
 const questionList = document.querySelector("#questionList")
 const questionCount = document.querySelector("#questionNumber")
 
 const sortNewest = document.querySelector('#sortNewest')
 const sortActive = document.querySelector('#sortActive')
 const sortUnanswered = document.querySelector('#sortUnanswered')
+const askQuestion = document.querySelector('.content-askquestion')
 
 const SortEnum = {
   NEWEST: "newest",
@@ -108,6 +112,7 @@ window.onload = function() {
   sortNewest.addEventListener('click', sortQuestionsByNew)
   sortActive.addEventListener('click', sortQuestionsByActive)
   sortUnanswered.addEventListener('click', sortQuestionsByUnanswered)
+  askQuestion.addEventListener('click', askQuestionPrompt)
 };
   
 function loadHomeQuestions(){
@@ -255,4 +260,27 @@ function filterQuestions(){
     }
     return true
   }) 
+}
+
+function askQuestionPrompt(){
+	//changes from current page to new question prompt page
+	content.style.display = 'none'
+	
+	//ask question page
+	let askQuestionContainer = document.createElement('div')
+	askQuestionContainer.class = 'askQuestion-container'
+	askQuestionContainer.style.display = 'flex'
+	
+	let askQuestionTitle = document.createElement('h2')
+	askQuestionTitle.class = 'askQuestion-directions'
+	askQuestionTitle.innerHTML = 'Question Title*'
+	
+	let askQuestionTitleDetails = document.createElement('p')
+	askQuestionTitleDetails.class = 'askQuestion-details'
+	askQuestionTitleDetails.innerHTML =  'Limit title to 100 characters or less'
+	
+	askQuestionContainer.appendChild(askQuestionTitle)
+	askQuestionContainer.appendChild(askQuestionTitleDetails)
+	
+	main.appendChild(askQuestionDiv)
 }
