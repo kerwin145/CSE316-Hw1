@@ -128,7 +128,7 @@ window.onload = function() {
   })
   askQuestion.addEventListener('click', askQuestionPrompt)
 }
-
+  
 function loadHomeQuestions(){
   //CLEAR OUT CHILDREN FROM QUESTIONLIST
   questionList.innerHTML = ""
