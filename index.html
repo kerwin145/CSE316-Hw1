@@ -9,7 +9,9 @@
   <div id="header" class="header">
     <div></div>
     <h1 class="title">Fake Stack Overflow</h1>
-    <input type="text" name="searchbar" class = "searchbar" placeholder = "Search . . ." id="">
+    <form action="" id="searchbar-form">
+      <input type="text" name="searchbar" class = "searchbar" placeholder = "Search . . ." id="">
+    </form>
   </div>
 
   <div id="main" class="main">
@@ -40,6 +42,10 @@
 
       <div id = "questionList">
         <!-- Dynamically filled in with JS -->
+      </div>
+      <div id = "questionList-emptyAlert">
+        <h3>No Questions Found</h3>
+        <small>Try editing search parameters or tag filters.</small>
       </div>
     </div>
 
